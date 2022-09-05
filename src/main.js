@@ -15,7 +15,6 @@ async function greet() {
 }
 
 async function openFileSystem() {
-  greetMsgEl.textContent = "Hello";
   // Open a selection dialog for image files
   const selected = await open({
     multiple: true,
