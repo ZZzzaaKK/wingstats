@@ -3,9 +3,21 @@
     windows_subsystem = "windows"
 )]
 
+use image::{io::Reader as ImageReader, DynamicImage};
+
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+async fn processImage(path: &str) {
+    let img = loadImage(path);
+}
+
+fn loadImage(path: &str) -> Result<DynamicImage, image::ImageError> {
+    let img = ImageReader::open(path)?.decode()?;
+    Ok(img)
 }
 
 fn main() {
